@@ -3,6 +3,7 @@
 Branch: claude/editor-v2-s1c
 Size: 3 files, 150 lines
 Repo: 123constante/bachata-website. Flag `organiserEditorV2` stays OFF; zero migrations; no admin change.
+Design: owner-picked FROZEN prototype, DESIGN-REGISTRY rows 61-81 (embedded below).
 
 Slice 11b is on the branch: read `docs/briefs/editor-v2-slice11b-status.handover.md` first. `CancelEventSheetV2` (StatusSheets.tsx) and the red "Cancel the event" row (EndCard.tsx `onCancel`) are built and tested but NOT mounted: no `series.*` command cancels a whole weekly event. Decision (owner's window, technical): a cancelled weekly event = every coming, not-yet-cancelled night gets one `occurrence.cancel` step (`cancelCommand(reason)` in shared/seriesCommands.ts), all in ONE `saveNow([...steps], [], 'Event cancelled', { noUndo: true })`, exactly how EditorV2.tsx `cancelNight` builds one night step via `nightStep`. Do not add a series command, do not use bulk_cancel.
 
