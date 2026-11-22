@@ -29,3 +29,6 @@ Files over 2 KB: `scripts/safe-edit.py` / `scripts/safe-write.py`. JSX entities 
 
 ## Handover
 `docs/briefs/editor-v2-slice17k-end-run-undo-wire.handover.md`. Tap table `button | destination | prototype/OLD`; any OLD row = not done. Rows: End the event (Every, no date), End the event (one-off), Undo on "Event ended", Make it live again (unchanged). Sections UNBUILT and Verified / Not verified (say plainly: resume_run was not exercised against prod; no writes). Run `npm run test:unit -- src/modules/organiser/p3/v2` and `npx tsc --noEmit -p .` and `npm run check:mojibake`. No secrets. Commit, push to claude/editor-v2-s1c. No PR.
+
+## G3 B-N8 raw-Unicode fix (added 2026-11-22, coordinator)
+`consistency.matrix` G3 B-N8 is RED from raw U+2014 in source. In `p3/v2/EveryBody.tsx` ~line 232 replace `venue?.name ?? '—'` with the escape `'—'`. No rendered change. Acceptance: G3 B-N8 passes after this slice (17i fixes NightCard.tsx and Facts.tsx).
