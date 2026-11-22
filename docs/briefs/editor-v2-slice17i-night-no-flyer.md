@@ -1,7 +1,7 @@
 # Brief: Editor v2 slice 17i, remove the flyer for one night (blank night flyer)
 
 Branch: claude/editor-v2-s1c
-Size: 4 files, 150 lines
+Size: 5 files, 160 lines
 Repo: 123constante/bachata-website. Flag `organiserEditorV2` stays OFF; zero migrations here; NO admin change (the server already stores a blank night flyer, see Ground truth).
 Design: owner-picked FROZEN prototype (DESIGN-REGISTRY rows 61-81), `~/.claude/plans/editor-v2/frozen/event-editor-c2-prototype.FROZEN-2026-11-21.html` (big file: grep `flyerSet`, `usual`, then Read with offset/limit), `checklist.md` SH-FLY-02..05, N-11, N-12, `tap-table.md` rows 57-59 (row 58 "Remove the flyer"). Prototype wins. Read `docs/briefs/editor-v2-slice17f-undo-gaps.md` and `docs/briefs/editor-v2-slice17e-money-gaps.handover.md` on this branch first (UNBUILT lists). Owner approved building this (item 9).
 
@@ -35,3 +35,9 @@ Files over 2 KB: `scripts/safe-edit.py` / `scripts/safe-write.py`. JSX entities 
 
 ## Handover
 `docs/briefs/editor-v2-slice17i-night-no-flyer.handover.md`. Tap table `button | destination | prototype/OLD`; any OLD row = not done, no "remaining differences" list. Rows at least: Remove the flyer (night), Choose a new flyer (night), Back to the usual flyer, Undo on the toast. Sections: Readers list (item 4), UNBUILT, Verified / Not verified (say plainly: no prod write was made; the server behaviour is read from the live function source). Run `npm run test:unit -- src/modules/organiser/p3/v2` and `npx tsc --noEmit -p .` and `npm run check:mojibake`. No secrets. Commit, push to claude/editor-v2-s1c. No PR.
+
+## G3 B-N8 raw-Unicode fix (added 2026-11-22, coordinator)
+`consistency.matrix` G3 B-N8 is RED on head 1959e11f7 from raw Unicode punctuation in source. Fix in THIS slice (no other behaviour change):
+- `p3/v2/NightCard.tsx` ~line 147: `venue?.name ?? '—'` -> use the escape `'—'` (JSX entity not valid inside a JS string).
+- `p3/v2/Facts.tsx` ~line 30: the `…` after `t.slice(0, 60)` -> `…` inside the template string.
+Files list gains `p3/v2/Facts.tsx` (5 files total). Acceptance: the G3 B-N8 test passes in this slice; rendered text is identical.
